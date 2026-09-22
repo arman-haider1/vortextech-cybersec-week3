@@ -9,7 +9,7 @@ Basic Security Audit of a Sample Website
 
 A structured, manual security audit performed against **OWASP Juice Shop** — a deliberately vulnerable web application designed for security practice. This audit was completed as part of the VortexTech Cyber Security Internship 2026 (Intermediate track, Week 3).
 
-Testing was done entirely manually using **browser DevTools** (no automated scanner). Three vulnerabilities were discovered and documented across three distinct OWASP Top 10 categories.
+Testing was performed manually using **Browser DevTools** and authentication testing. Three findings are documented: SQL Injection, Sensitive Data Exposure, and a manual XSS test where successful XSS execution was not confirmed.
 
 ---
 
@@ -18,16 +18,18 @@ Testing was done entirely manually using **browser DevTools** (no automated scan
 | # | Finding | Severity | Category |
 |---|---|---|---|
 | 1 | SQL Injection — Admin Authentication Bypass | 🔴 Critical | Injection (A03) |
-| 2 | Sensitive Data Exposure via API Response | 🟡 Medium | Info Disclosure (A02) |
-| 3 | XSS Input Accepted in Search Bar | 🟡 Medium | Cross-Site Scripting (A03) |
+| 2 | Sensitive Data Exposure via API Response | 🟡 Medium | Information Disclosure (A02) |
+| 3 | Manual XSS Test — No Confirmed XSS | 🟡 Medium | Cross-Site Scripting (A03) |
 
-**Total: 3 findings — Critical: 1 | Medium: 2 | Low: 0**
+**Total Findings: 3 — Critical: 1 | Medium: 2 | Low: 0**
+
+> **Note:** The XSS test did not result in confirmed JavaScript execution. No JavaScript alert popup or other successful script execution was observed. It is documented as a manual XSS test result rather than confirmed XSS execution.
 
 ---
 
 ## Repository Structure
 
-```
+```text
 vortextech-cybersec-week3/
 ├── report/
 │   ├── VortexTech_Week3_Security_Audit_Manual.md   ← Full audit report (Markdown)
@@ -52,7 +54,8 @@ vortextech-cybersec-week3/
 This audit was performed against a locally hosted OWASP Juice Shop instance via Docker.
 
 ### Prerequisites
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed
+
+- Docker Desktop installed
 
 ### Start Juice Shop
 
@@ -62,7 +65,7 @@ docker compose up -d
 
 Then open your browser and go to:
 
-```
+```text
 http://localhost:3000
 ```
 
@@ -72,7 +75,7 @@ http://localhost:3000
 docker compose down
 ```
 
-> ⚠️ **Important:** Only test against this local instance. Never perform security testing against real websites without explicit written permission.
+> ⚠️ **Important:** Only test against this local practice instance. Never perform security testing against real websites without explicit written permission.
 
 ---
 
@@ -90,7 +93,7 @@ docker compose down
 
 All testing was performed manually following this workflow:
 
-```
+```text
 Docker → Juice Shop (localhost:3000)
   ↓
 Manual XSS testing (search bar)
@@ -103,13 +106,18 @@ Document findings + remediation
 ```
 
 Each finding is documented with:
-- Clear title and severity
+
+- Clear title and severity where applicable
 - Steps taken to discover it
 - OWASP Top 10 / CWE category
+- Affected endpoint or functionality
+- Evidence
 - Potential real-world impact
 - Practical remediation recommendation
 
-Full details in [`report/VortexTech_Week3_Security_Audit_Manual.md`](report/VortexTech_Week3_Security_Audit_Manual.md)
+The XSS test is explicitly documented as **no confirmed XSS**, because the payload did not result in JavaScript execution.
+
+Full details are available in `report/VortexTech_Week3_Security_Audit_Manual.md`.
 
 ---
 
@@ -125,5 +133,18 @@ Full details in [`report/VortexTech_Week3_Security_Audit_Manual.md`](report/Vort
 
 ---
 
-*VortexTech · Cyber Security Internship 2026 · vortextechnologies77@gmail.com*
+## Disclaimer
+
+This assessment was performed against a local, deliberately vulnerable practice application for educational and internship purposes.
+
+No real production website or unauthorized system was targeted.
+
+---
+
+## Author
+
+**Arman Haider**  
+Cyber Security Intern  
+
+**VortexTech Cyber Security Internship — Week 3 of 4**
 
